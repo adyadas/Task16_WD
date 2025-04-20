@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript DOM Tasks</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9ff;
+      padding: 30px;
+      line-height: 1.6;
+    }
+
+    h2 {
+      color: #2c3e50;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 5px;
+    }
+
+    form, .section {
+      background-color: #fff;
+      padding: 15px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      border-left: 5px solid #3498db;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0 5px;
+    }
+
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 8px 12px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      margin-right: 10px;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    #output, #dateTime {
+      padding: 10px;
+      background: #ecf0f1;
+      margin-top: 10px;
+      border-radius: 4px;
+    }
+
+    #fontText {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    img {
+      max-width: 250px;
+      display: block;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>1. Basic Information Form</h2>
+  <form id="infoForm">
+    <label>Full Name:</label>
+    <input type="text" id="name" required>
+
+    <label>Email:</label>
+    <input type="email" id="email" required>
+
+    <label>Address:</label>
+    <input type="text" id="address" required>
+
+    <button type="button" onclick="showFormData()">Submit</button>
+  </form>
+
+  <div id="output" class="section"></div>
+
+  <h2>2. Change Image on Button Click</h2>
+  <div class="section">
+    <img id="myImage" src="img2.jpeg" alt="Image">
+    <button onclick="changeImage()">Change Image</button>
+  </div>
+
+  <h2>3. Font Size Changer</h2>
+  <div class="section">
+    <p id="fontText">This is some sample text to change font size.</p>
+    <button onclick="increaseFont()">Increase</button>
+    <button onclick="decreaseFont()">Decrease</button>
+  </div>
+
+  <h2>4. Show Current Date and Time</h2>
+  <div class="section">
+    <button onclick="showDateTime()">Show Date & Time</button>
+    <div id="dateTime"></div>
+  </div>
+
+  <script>
+    // 1. Show Form Data
+    function showFormData() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const address = document.getElementById("address").value;
+
+      const output = `
+        <strong>Submitted Information:</strong><br>
+        Name: ${name}<br>
+        Email: ${email}<br>
+        Address: ${address}
+      `;
+
+      document.getElementById("output").innerHTML = output;
+    }
+
+    // 2. Change Image
+    let imgChanged = false;
+    function changeImage() {
+      const image = document.getElementById("myImage");
+      if (!imgChanged) {
+        image.src = "img1.png";
+        imgChanged = true;
+      } else {
+        image.src = "img2.png";
+        imgChanged = false;
+      }
+    }
+
+    // 3. Font Size Change
+    let fontSize = 18;
+    function increaseFont() {
+      fontSize += 2;
+      document.getElementById("fontText").style.fontSize = fontSize + "px";
+    }
+
+    function decreaseFont() {
+      if (fontSize > 10) {
+        fontSize -= 2;
+        document.getElementById("fontText").style.fontSize = fontSize + "px";
+      }
+    }
+
+    // 4. Show Date & Time
+    function showDateTime() {
+      const now = new Date();
+      document.getElementById("dateTime").innerHTML = now.toString();
+    }
+  </script>
+</body>
+</html>
